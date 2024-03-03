@@ -1,6 +1,8 @@
 const  jwt  = require("jsonwebtoken");
 const { userSignup, userSign } = require("./zod");
+require('dotenv').config()
 const key=process.env.SECRET_KEY
+
 
 const signUpMiddleware = async (req, res, next) => {
   const body = req.body;
@@ -29,11 +31,10 @@ const singInMiddleware = async (req, res, next) => {
     return;
   }
 };
-
+ 
 const AuthMiddleware=async (req,res,next)=>{
-  const value=req.headers.Authorization;
-
-  if(!value.startsWith("Bearer")){
+  const value=req.headers.authorization
+  if(!value || !value.startsWith("Bearer")){
     res.status(404).json({
       message:"Please Login to see posts"
     })
@@ -41,15 +42,15 @@ const AuthMiddleware=async (req,res,next)=>{
   }
   const token=value.split(" ")[1];
 
-  const result=jwt.verify(token,key)
-  if(!result){
-    res.status(404).json({
-      message:"Please Login to see posts"
-    })
-    return
+  try {
+    const result = await jwt.verify(token, key);
+    req.id = result.id;
+    next();
+  } catch (error) {
+    res.status(401).json({
+      message: "Please Login to see posts"
+    });
   }
-  req.id=result.id;
-  next();
 
 }
 

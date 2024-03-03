@@ -1,24 +1,42 @@
 import Quote from "./Quote";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
 export default function Signup() {
+  const navigate = useNavigate()
+  const [isChecked,setIsChecked]=useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [value, setValue] = useState({
     name: "",
     email: "",
     password: "",
   });
 
+  const handleCheckboxChange = (event) => {
+    setIsChecked(event.target.checked);
+  };
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   async function request() {
-    axios.post("http://localhost:3000/api/user/signup",value)
-        .then(res=>{
-             console.log(res.data)
-        })
-        .catch(error=>{
-            console.log(error.response.data.message)
-            alert(error.response.data.message)
-        })
+    if(!isChecked){
+        alert('Please agree to terms and conditions')
+    }else{
+      axios.post("http://localhost:3000/api/user/signup", value)
+      .then(res => {
+
+        localStorage.setItem("token", res.data.token)
+        alert("Congrats")
+        navigate('/post')
+      })
+      .catch(error => {
+
+        alert(error.response.data.message)
+      })
+    }
+    
   }
 
   return (
@@ -68,8 +86,16 @@ export default function Signup() {
                   }));
                 }}
                 label="Password"
-                type="password"
+                type={showPassword ? "text" : "password"}
+                handleTogglePassword={handleTogglePassword}
+                showPassword={showPassword}
               ></Inputs>
+              
+            </div>
+            
+            <div className="flex items-center">
+              <input  type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 " onChange={handleCheckboxChange}/>
+              <label  className="ms-2 text-sm font-medium text-gray-900 ">I agree with the <a href="#" className="text-blue-600  hover:underline">terms and conditions</a>.</label>
             </div>
             <div className="flex w-2/3 items-center">
               <button
@@ -91,18 +117,42 @@ export default function Signup() {
   );
 }
 
-function Inputs({ placeholder, onchange, type, label }) {
+function Inputs({ placeholder, onchange, type, label, handleTogglePassword,showPassword }) {
+  console.log(showPassword)
   return (
     <div>
       <label className="block mb-2 text-sm  pt-4 font-bold">{label}</label>
-      <input
-        onChange={onchange}
-        type={type || "text"}
-        id="first_name"
-        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-        placeholder={placeholder}
-        required
-      />
+      <div className="relative">
+        <input
+          onChange={onchange}
+          type={type || "text"}
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+          placeholder={placeholder}
+          required
+        />
+        
+       {
+        
+       label === "Password" && (
+  <button type="button" onClick={handleTogglePassword} class="absolute top-0 end-0 p-3.5 rounded-e-md dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+    <svg class="flex-shrink-0 size-3.5 text-gray-400 dark:text-neutral-600" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      {showPassword ? (
+        <>
+          <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/>
+          <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/>
+          <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/>
+          <line x1="2" x2="22" y1="2" y2="22"/>
+        </>
+      ) : (
+        <>
+          <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+          <circle cx="12" cy="12" r="3"/>
+        </>
+      )}
+    </svg>
+          </button>
+        )}
+      </div>
     </div>
   );
 }

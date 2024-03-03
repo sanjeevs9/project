@@ -11,7 +11,7 @@ export default function Popup({
     }
     return(
         <>
-        <div className="h-fit w-40 bg-slate-50  absolute translate-y-24 rounded-md ">
+        <div className="h-fit w-40 bg-slate-50  absolute translate-y-28 rounded-md ">
             <ol className=" gap-2  ">
                 <li className="  text-sm pl-2 ">
                     {email} 

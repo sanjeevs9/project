@@ -1,12 +1,13 @@
 const express =require("express");
 const jwt =require("jsonwebtoken")
 const router=express.Router();
-const {userSignup}=require("../zod");
 const { signUpMiddleware, singInMiddleware } = require("../middleware");
+require('dotenv').config()
 const { User } = require("../database");
 const key=process.env.SECRET_KEY
 const bcrypt =require("bcrypt")
 const salt=10;
+
 
 
 // create user account
@@ -30,9 +31,8 @@ router.post("/signup",signUpMiddleware,async(req,res)=>{
     })
 
     const token=jwt.sign({id:user._id},key,{
-        expiresIn: 60
+        expiresIn: '1d'
     })
-    console.log(token)
     res.json({
         token
     })
@@ -59,9 +59,8 @@ router.post("/signin",singInMiddleware,async(req,res)=>{
     }
 
     const token=jwt.sign({id:user._id},key,{
-        expiresIn: 60
+        expiresIn: '1d'
     })
-    console.log(token)
     res.json({
         token
     })

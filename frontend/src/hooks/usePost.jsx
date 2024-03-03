@@ -12,14 +12,14 @@ export const usePost = () => {
     fetchMorePosts();
   }, []);
 
-  const fetchMorePosts = () => {
+   const fetchMorePosts = () => {
     setLoading(true);
     axios.get(`http://localhost:3000/api/post?page=${page}&limit=5`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     }).then(res => {
-      console.log(res.data);
+    
       setPosts(prevPosts => [...prevPosts, ...res.data]);
       setPage(prevPage => prevPage + 1);
       if (res.data.length ===0) {
@@ -27,7 +27,8 @@ export const usePost = () => {
       }
       setLoading(false);
     }).catch(error => {
-      console.error(error);
+ 
+      alert(error.response.data.message)
       setLoading(false);
     });
   };

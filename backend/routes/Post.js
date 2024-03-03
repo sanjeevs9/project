@@ -1,10 +1,11 @@
 const express =require("express");
 const { Post } = require("../database");
+const { AuthMiddleware } = require("../middleware");
 
 const router=express.Router();
 
 
-router.get('',async(req,res)=>{
+router.get('',AuthMiddleware,async(req,res)=>{
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 5;
   

@@ -7,7 +7,7 @@ export default function PostCard({
 }) {
   return (
     <div
-      className="justify-center
+      className="justify-center max-w-md md:max-w-xl
     "
     >
       <div className="flex flex-row pb-2">
