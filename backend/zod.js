@@ -9,13 +9,9 @@ const userSignup=z.object({
     .string({required_error: "password is required"})
     .min(6,{message:"Password must be atleast of 6 chars"}),
 
-    firstName:z
-    .string({required_error:"FirstName is required"})
-    .min(1,{message:"FirstName is required"}),
-
-    lastName:z
-    .string({required_error:"LastName is requried"})
-    .min(1,{message:"Lastname is required"})
+    name:z
+    .string({required_error:"Name is required"})
+    .min(1,{message:"Name is required"}),
 
 })
 

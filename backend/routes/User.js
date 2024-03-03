@@ -26,11 +26,12 @@ router.post("/signup",signUpMiddleware,async(req,res)=>{
     const user=User.create({
         email:body.email,
         password:hashPass,
-        firstName:body.firstName,
-        lastName:body.lastName
+        name:body.name
     })
 
-    const token=jwt.sign({id:user._id},key)
+    const token=jwt.sign({id:user._id},key,{
+        expiresIn: 60
+    })
     console.log(token)
     res.json({
         token
@@ -57,7 +58,9 @@ router.post("/signin",singInMiddleware,async(req,res)=>{
         return
     }
 
-    const token=jwt.sign({id:user._id},key)
+    const token=jwt.sign({id:user._id},key,{
+        expiresIn: 60
+    })
     console.log(token)
     res.json({
         token
