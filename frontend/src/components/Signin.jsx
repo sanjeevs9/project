@@ -2,6 +2,7 @@ import Quote from "./Quote";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
 
 
 export default function Signin() {
@@ -22,12 +23,31 @@ export default function Signin() {
         axios.post("http://localhost:3000/api/user/signin",value)
         .then(res=>{
              localStorage.setItem("token",res.data.token)
-             alert("Congrats")
+             toast.success('Successfully login !', {
+              position: "top-center",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+              });
              navigate('/post')
 
         })
         .catch(error=>{
-            alert(error.response.data.message)
+          toast.error(error.response.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
+            // alert(error.response.data.message)
         })
       }
 
@@ -61,7 +81,7 @@ export default function Signin() {
                 label="Email"
               ></Inputs>
               <Inputs
-                placeholder="***"
+                placeholder="******"
                 onchange={(e) => {
                   setValue((c) => ({
                     ...c,

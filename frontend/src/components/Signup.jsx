@@ -2,6 +2,7 @@ import Quote from "./Quote";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { toast } from 'react-toastify';
 
 export default function Signup() {
   const navigate = useNavigate()
@@ -22,18 +23,46 @@ export default function Signup() {
 
   async function request() {
     if(!isChecked){
-        alert('Please agree to terms and conditions')
+      toast.error('Please agree to terms and conditions!', {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+        // alert('Please agree to terms and conditions')
     }else{
       axios.post("http://localhost:3000/api/user/signup", value)
       .then(res => {
 
         localStorage.setItem("token", res.data.token)
-        alert("Congrats")
+        toast.success('Successfully account created!', {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
         navigate('/post')
       })
       .catch(error => {
-
-        alert(error.response.data.message)
+        toast.error(error.response.data.message, {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
+        // alert(error.response.data.message)
       })
     }
     
@@ -78,7 +107,7 @@ export default function Signup() {
                 label="Email"
               ></Inputs>
               <Inputs
-                placeholder="***"
+                placeholder="*******"
                 onchange={(e) => {
                   setValue((c) => ({
                     ...c,
@@ -118,7 +147,6 @@ export default function Signup() {
 }
 
 function Inputs({ placeholder, onchange, type, label, handleTogglePassword,showPassword }) {
-  console.log(showPassword)
   return (
     <div>
       <label className="block mb-2 text-sm  pt-4 font-bold">{label}</label>

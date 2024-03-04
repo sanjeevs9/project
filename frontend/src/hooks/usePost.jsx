@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react"
+import { toast } from 'react-toastify';
 
 export const usePost = () => {
   const [loading, setLoading] = useState(true);
@@ -27,8 +28,17 @@ export const usePost = () => {
       }
       setLoading(false);
     }).catch(error => {
- 
-      alert(error.response.data.message)
+      toast.error(error.response.data.message, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+      // alert(error.response.data.message)
       setLoading(false);
     });
   };

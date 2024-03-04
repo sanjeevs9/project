@@ -1,5 +1,5 @@
 const  jwt  = require("jsonwebtoken");
-const { userSignup, userSign } = require("./zod");
+const { userSignup, userSign, passwordReset } = require("./zod");
 require('dotenv').config()
 const key=process.env.SECRET_KEY
 
@@ -34,6 +34,7 @@ const singInMiddleware = async (req, res, next) => {
  
 const AuthMiddleware=async (req,res,next)=>{
   const value=req.headers.authorization
+  console.log(value)
   if(!value || !value.startsWith("Bearer")){
     res.status(404).json({
       message:"Please Login to see posts"
@@ -54,8 +55,24 @@ const AuthMiddleware=async (req,res,next)=>{
 
 }
 
+const PasswordReset=async(req,res,next)=>{
+  const body=req.body;
+  try{
+    const bodyParse= await passwordReset.parseAsync(body)
+    req.body = bodyParse;
+    next();
+  }
+  catch(error){
+    res.status(400).json({
+      message: error.errors[0].message,
+    });
+    return;
+  }
+}
+
 module.exports = {
   signUpMiddleware,
   singInMiddleware,
-  AuthMiddleware
+  AuthMiddleware,
+  PasswordReset
 };
