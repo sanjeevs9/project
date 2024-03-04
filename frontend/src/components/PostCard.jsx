@@ -14,7 +14,11 @@ export default function PostCard({
         <div
           className={`h-6 w-6 rounded-full flex  flex-col items-center justify-center overflow-hidden`}
           dangerouslySetInnerHTML={{ __html: avatar }}
-          style={{ maxWidth: "100%", maxHeight: "100%" ,backgroundColor: getRandomColor()}}
+          style={{
+            maxWidth: "100%",
+            maxHeight: "100%",
+            backgroundColor: getRandomColor(),
+          }}
         />
         <div className=" flex flex-col justify-center pl-2 font-semibold">
           {author}
@@ -43,10 +47,10 @@ export default function PostCard({
 }
 
 function getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
+  var letters = "0123456789ABCDEF";
+  var color = "#";
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
   }
+  return color;
+}

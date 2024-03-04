@@ -31,17 +31,18 @@ const UserSchema = mongoose.Schema({
   },
 });
 
-//just for dummy data that i have imported into mongodb 
-const PostSchema=mongoose.Schema({
-    title:String,
-    description:String,
-    publish_date:String,
-    author:String
-})
+//just for dummy data that i have imported into mongodb
+const PostSchema = mongoose.Schema({
+  title: String,
+  description: String,
+  publish_date: String,
+  author: String,
+});
 
 const User = mongoose.model("User", UserSchema);
-const Post =mongoose.model("Post", PostSchema);
+const Post = mongoose.model("Post", PostSchema);
 
 module.exports = {
-  User,Post
+  User,
+  Post,
 };

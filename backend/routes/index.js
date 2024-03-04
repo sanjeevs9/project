@@ -1,10 +1,10 @@
-const express =require("express");
-const User =require("./User");
-const Post=require("./Post")
+const express = require("express");
+const User = require("./User");
+const Post = require("./Post")
 
-const router=express.Router();
+const router = express.Router();
 
-router.use('/user',User)
-router.use('/post',Post)
+router.use('/user', User)
+router.use('/post', Post)
 
-module.exports=router
+module.exports = router

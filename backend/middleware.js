@@ -1,8 +1,7 @@
-const  jwt  = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const { userSignup, userSign, passwordReset } = require("./zod");
-require('dotenv').config()
-const key=process.env.SECRET_KEY
-
+require("dotenv").config();
+const key = process.env.SECRET_KEY;
 
 const signUpMiddleware = async (req, res, next) => {
   const body = req.body;
@@ -31,17 +30,16 @@ const singInMiddleware = async (req, res, next) => {
     return;
   }
 };
- 
-const AuthMiddleware=async (req,res,next)=>{
-  const value=req.headers.authorization
-  console.log(value)
-  if(!value || !value.startsWith("Bearer")){
+
+const AuthMiddleware = async (req, res, next) => {
+  const value = req.headers.authorization;
+  if (!value || !value.startsWith("Bearer")) {
     res.status(404).json({
-      message:"Please Login to see posts"
-    })
-    return
+      message: "Please Login to see posts",
+    });
+    return;
   }
-  const token=value.split(" ")[1];
+  const token = value.split(" ")[1];
 
   try {
     const result = await jwt.verify(token, key);
@@ -49,30 +47,28 @@ const AuthMiddleware=async (req,res,next)=>{
     next();
   } catch (error) {
     res.status(401).json({
-      message: "Please Login to see posts"
+      message: "Please Login to see posts",
     });
   }
+};
 
-}
-
-const PasswordReset=async(req,res,next)=>{
-  const body=req.body;
-  try{
-    const bodyParse= await passwordReset.parseAsync(body)
+const PasswordReset = async (req, res, next) => {
+  const body = req.body;
+  try {
+    const bodyParse = await passwordReset.parseAsync(body);
     req.body = bodyParse;
     next();
-  }
-  catch(error){
+  } catch (error) {
     res.status(400).json({
       message: error.errors[0].message,
     });
     return;
   }
-}
+};
 
 module.exports = {
   signUpMiddleware,
   singInMiddleware,
   AuthMiddleware,
-  PasswordReset
+  PasswordReset,
 };
