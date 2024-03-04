@@ -48,3 +48,5 @@ VITE_PUBLIC_KEY**
 ![image](https://github.com/sanjeevs9/Food/assets/88326960/53bc6f47-53ec-4e50-9ae4-7c105763f69c)
 
 ![image](https://github.com/sanjeevs9/Food/assets/88326960/300f876d-50fa-42aa-82e5-105d7bb4bbe3)
+
+![image](https://github.com/sanjeevs9/project/assets/88326960/ed2fcdc6-9996-40d1-8890-c8ef10d52d8b)
