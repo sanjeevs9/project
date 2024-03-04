@@ -28,7 +28,6 @@ VITE_PUBLIC_KEY**
 
 ## Features
 
-- Light/dark mode toggle
 - Welcome email on signup
 - Clean notifications for each error and login/logout
 - infinite scroll
