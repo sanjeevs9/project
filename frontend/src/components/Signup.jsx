@@ -34,7 +34,7 @@ export default function Signup() {
           to_name: name,
           message: "Hello welcome to advisorpedia",
           from_name: "Sanjeev",
-          receiver: "sanjeev.19kr@gmail.com",
+          receiver: email,
           reply_to: "sanjeev.19kr@gmail.com",
         },
         key
