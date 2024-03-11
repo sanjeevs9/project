@@ -1,7 +1,6 @@
 
-# Advisorpedia 
+# Blogging project
 
-Assignment for internship
 
 ps: signup using your own email to get a welcome mail
 
