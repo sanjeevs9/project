@@ -12,4 +12,4 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-app.use("/api", mainRouter);
+app.use("/api", mainRouter)
