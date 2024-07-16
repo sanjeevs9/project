@@ -1,14 +1,16 @@
 import Quote from "./Quote";
 import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import emailjs from "@emailjs/browser";
+import { Context } from "./Context";
 const serive = import.meta.env.VITE_SERVICE_ID;
 const temp = import.meta.env.VITE_TEMPLATE_ID;
 const key = import.meta.env.VITE_PUBLIC_KEY;
 
 export default function Signup() {
+  const {login,setlogin}=useContext(Context)
   const navigate = useNavigate();
   const [isChecked, setIsChecked] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -26,27 +28,27 @@ export default function Signup() {
   };
 
   function email(email, name) {
-    emailjs
-      .send(
-        serive,
-        temp,
-        {
-          to_name: name,
-          message: "Hello welcome to advisorpedia",
-          from_name: "Sanjeev",
-          receiver: email,
-          reply_to: "sanjeev.19kr@gmail.com",
-        },
-        key
-      )
-      .then(
-        () => {
-          console.log("success");
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+    // emailjs
+    //   .send(
+    //     serive,
+    //     temp,
+    //     {
+    //       to_name: name,
+    //       message: "Hello welcome to advisorpedia",
+    //       from_name: "Sanjeev",
+    //       receiver: email,
+    //       reply_to: "sanjeev.19kr@gmail.com",
+    //     },
+    //     key
+    //   )
+    //   .then(
+    //     () => {
+    //       console.log("success");
+    //     },
+    //     (error) => {
+    //       console.log(error);
+    //     }
+    //   );
   }
 
   async function request() {
@@ -77,6 +79,7 @@ export default function Signup() {
             progress: undefined,
             theme: "light",
           });
+          setlogin(!login);
           navigate("/post");
         })
         .catch((error) => {

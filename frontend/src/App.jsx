@@ -4,6 +4,7 @@ import Signin from "./components/Signin";
 import Dashboard from "./components/Dashboard";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Write from "./components/Write";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/post" element={<Dashboard />} />
+          <Route path="/write" element={<Write/>}/>
         </Routes>
       </BrowserRouter>
       <ToastContainer

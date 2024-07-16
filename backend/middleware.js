@@ -40,7 +40,7 @@ const AuthMiddleware = async (req, res, next) => {
     return;
   }
   const token = value.split(" ")[1];
-
+  
   try {
     const result = await jwt.verify(token, key);
     req.id = result.id;

@@ -1,12 +1,14 @@
 import Quote from "./Quote";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { Context } from "./Context";
 
 export default function Signin() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const {login,setlogin}=useContext(Context)
 
   const [value, setValue] = useState({
     email: "",
@@ -32,6 +34,7 @@ export default function Signin() {
           progress: undefined,
           theme: "light",
         });
+        setlogin(!login);
         navigate("/post");
       })
       .catch((error) => {

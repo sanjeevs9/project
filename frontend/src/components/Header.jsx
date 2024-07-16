@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Popup from "./Popup";
 import { createAvatar } from "@dicebear/core";
 import { bottts } from "@dicebear/collection";
+import { Context } from "./Context";
+import { useNavigate } from "react-router-dom";
 
 const seed = Math.random().toString();
 const avatar = createAvatar(bottts, {
@@ -10,6 +12,8 @@ const avatar = createAvatar(bottts, {
 
 const svg = avatar.toString();
 export default function Header() {
+  const navigate=useNavigate()
+  const{email}=useContext(Context);
   const [pop, setpop] = useState(false);
 
   function onClick() {
@@ -45,7 +49,7 @@ export default function Header() {
                   />
                 </svg>
               </div>
-              <div className="flex pt-1 ">Write</div>
+              <div className="flex pt-1 " onClick={()=>{navigate("/write")}}>Write</div>
             </div>
 
             <div
@@ -57,7 +61,7 @@ export default function Header() {
                 dangerouslySetInnerHTML={{ __html: svg }}
               />
             </div>
-            {pop == true ? <Popup email="sanjeev.19@gail.com" /> : null}
+            {pop == true ? <Popup email={email} /> : null}
           </div>
         </div>
       </div>

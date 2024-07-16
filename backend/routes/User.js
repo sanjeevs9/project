@@ -105,4 +105,22 @@ router.put("/reset", AuthMiddleware, PasswordReset, async (req, res) => {
   });
 });
 
+
+//get user details
+router.get("/get",AuthMiddleware,async (req,res)=>{
+  const id=await req.id;
+  const user=await User.findOne({_id:id})
+
+  if(!user){
+    res.status(404).json({
+      message:"User not found"
+    })
+  }
+  res.json({
+    email:user.email
+  })
+ 
+
+})
+
 module.exports = router;

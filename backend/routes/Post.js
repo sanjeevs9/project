@@ -13,4 +13,6 @@ router.get("", AuthMiddleware, async (req, res) => {
   res.json(posts);
 });
 
+router.post("/write")
+
 module.exports = router;

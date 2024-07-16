@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ReactDom from "react-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { Context } from "./Context";
 
 export default function Reset({ pop, popup }) {
+  const {email}=useContext(Context);
   const [value, setvalue] = useState({
-    email: "",
+    email: email,
     oldPassword: "",
     newPassword: "",
   });
@@ -86,14 +88,9 @@ export default function Reset({ pop, popup }) {
                   type="email"
                   name="email"
                   id="email"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2"
-                  placeholder="name@company.com"
-                  onChange={(e) => {
-                    setvalue((c) => ({
-                      ...c,
-                      email: e.target.value,
-                    }));
-                  }}
+                  className="bg-gray-50 border border-gray-300 text-gray-700 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2"
+                  value={email}
+                  readOnly={true}
                 />
               </div>
               <div>
