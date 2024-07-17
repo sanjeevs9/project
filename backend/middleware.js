@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { userSignup, userSign, passwordReset } = require("./zod");
+const { userSignup, userSign, passwordReset, Post } = require("./zod");
 require("dotenv").config();
 const key = process.env.SECRET_KEY;
 
@@ -66,9 +66,24 @@ const PasswordReset = async (req, res, next) => {
   }
 };
 
+const PostBlog = async (req,res,next) =>{
+  const body=req.body;
+  try{
+    const bodyParse=await Post.parseAsync(body);
+    req.body=bodyParse;
+    next();
+  }catch(error){
+    res.status(400).json({
+      message:error.errors[0].message
+    })
+    return;
+  }
+}
+
 module.exports = {
   signUpMiddleware,
   singInMiddleware,
   AuthMiddleware,
   PasswordReset,
+  PostBlog
 };

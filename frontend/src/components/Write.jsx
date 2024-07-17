@@ -3,6 +3,7 @@ import Header from './Header';
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import network from '../../network';
 
 
 export default function Write(){
@@ -20,20 +21,23 @@ export default function Write(){
         if(!token){
             return
         }
-        return
-         axios.post(`${network}/api/post/write`,
+        const date = new Date();
+        const data = date.toString().split(" ");
+        let final = data[1] + " " + data[2] + ", " + data[3];
+    
+        
+        await axios.post(`${network}post/write`,
          {
                 title:value.title,
-                content:value.content
+                description:value.content,
+                publish_date:final
          },{
             headers:{
                 Authorization:`Bearer ${token}`
             }
          }
          ).then(res=>{
-            console.log(res.data)
-            alert(res.data.message);
-            navigate("/post")
+            console.log(res.data)          
 
          }).catch(error=>{
             console.log(error)

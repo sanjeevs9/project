@@ -38,8 +38,18 @@ const passwordReset = z.object({
     .email({ message: "Invalid email address" }),
 });
 
+const Post = z.object({
+  title:z.string({required_error:"Title is required"})
+  .min(1,{message:"Title is required"}),
+  description:z.string({required_error:"Description is required"})
+  .min(1,{message:"Description is required"}),
+  // author:z.string({required_error:"Description is required"}),
+  publish_date:z.string({required_error:"date is required"})
+})
+
 module.exports = {
   userSign,
   userSignup,
   passwordReset,
+  Post
 };
