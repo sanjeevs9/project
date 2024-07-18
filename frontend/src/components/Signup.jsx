@@ -80,7 +80,7 @@ export default function Signup() {
             theme: "light",
           });
           setlogin(!login);
-          navigate("/post");
+          navigate("/");
         })
         .catch((error) => {
           toast.error(error.response.data.message, {

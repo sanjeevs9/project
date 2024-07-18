@@ -28,7 +28,7 @@ export default function Popup({ email }) {
 
   return (
     <>
-      <div className="h-fit w-40 bg-slate-50  absolute translate-y-28 rounded-md ">
+      <div className="h-fit w-40 bg-slate-50 z-50  absolute translate-y-28 rounded-md ">
         <Reset pop={pop} popup={popup} />
         <ol className=" gap-2  pt-2">
           <li className="  text-sm pl-2 ">{email}</li>

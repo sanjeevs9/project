@@ -34,6 +34,7 @@ export default function Dashboard() {
                   title={post.title}
                   content={post.description}
                   avatar={svg.toString()}
+                  id={post._id}
                 ></PostCard>
               );
             })}

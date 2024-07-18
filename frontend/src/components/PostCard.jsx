@@ -1,14 +1,19 @@
+import { useNavigate } from "react-router-dom";
+
 export default function PostCard({
   author,
   published,
   title,
   content,
   avatar,
+  id
 }) {
+  const navigate =useNavigate();
   return (
     <div
-      className="justify-center max-w-md md:max-w-xl
+      className="justify-center max-w-md md:max-w-xl cursor-pointer
     "
+    onClick={()=>{navigate(`/blog/${id}`)}}
     >
       <div className="flex flex-row pb-2">
         <div

@@ -5,16 +5,18 @@ import Dashboard from "./components/Dashboard";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Write from "./components/Write";
+import Blog from "./components/Blog";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Signup />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
-          <Route path="/post" element={<Dashboard />} />
+          <Route path="/" element={<Dashboard />} />
           <Route path="/write" element={<Write/>}/>
+          <Route path="/blog/:id" element={<Blog/>}/>
         </Routes>
       </BrowserRouter>
       <ToastContainer

@@ -16,11 +16,7 @@ export const usePost = () => {
   const fetchMorePosts = () => {
     setLoading(true);
     axios
-      .get(`http://localhost:3000/api/post?page=${page}&limit=5`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .get(`http://localhost:3000/api/post?page=${page}&limit=5`)
       .then((res) => {
         setPosts((prevPosts) => [...prevPosts, ...res.data]);
         setPage((prevPage) => prevPage + 1);

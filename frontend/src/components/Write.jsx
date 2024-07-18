@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import network from '../../network';
+import { toast } from 'react-toastify';
 
 
 export default function Write(){
@@ -15,11 +16,26 @@ export default function Write(){
     const editor =useRef(null)
     const navigate=useNavigate();
 
-
-    async function handle(){
-        console.log(value)
+    useEffect(()=>{
         if(!token){
-            return
+            toast.error("please login to post a blog", {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });
+              navigate("/signin")
+        }
+    },[])
+   
+    async function handle(){
+        
+        if(!token){
+            return 
         }
         const date = new Date();
         const data = date.toString().split(" ");
@@ -37,10 +53,30 @@ export default function Write(){
             }
          }
          ).then(res=>{
-            console.log(res.data)          
+            console.log(res.data) 
+            toast.success("Successfully posted", {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });         
 
          }).catch(error=>{
             console.log(error)
+            toast.error(error.response.data.message, {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });
          })
     }
     return(

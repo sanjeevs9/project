@@ -15,6 +15,7 @@ export default function Header() {
   const navigate=useNavigate()
   const{email}=useContext(Context);
   const [pop, setpop] = useState(false);
+  
 
   function onClick() {
     setpop(!pop);
@@ -24,7 +25,7 @@ export default function Header() {
       <div>
         <div className="flex    pl-8 pr-8  flex-row w-full bg-red-300">
           <div className="flex  w-1/2  items-center gap-4">
-            <div className="w-36 h-16  flex flex-col justify-center p-3">
+            <div className="w-36 h-16  flex flex-col justify-center p-3 cursor-pointer" onClick={()=>{navigate("/post")}}>
               <img
                 src="https://advisoropedia.in/wp-content/uploads/2024/02/White-Transparent.png"
                 alt="Blogger Icon"

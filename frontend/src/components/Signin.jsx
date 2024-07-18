@@ -35,7 +35,7 @@ export default function Signin() {
           theme: "light",
         });
         setlogin(!login);
-        navigate("/post");
+        navigate("/");
       })
       .catch((error) => {
         toast.error(error.response.data.message, {
@@ -59,12 +59,12 @@ export default function Signin() {
           <div className="h-screen  flex flex-col justify-center gap-6 items-center">
             <div className="flex gap-2 flex-col  items-center ">
               <div className="font-extrabold text-4xl">
-                Login to you Account
+                Login to your Account
               </div>
               <div className=" text-center text-gray-500">
                 Dont have an account?
                 <span className="pl-2">
-                  <Link to={"/"} className="underline">
+                  <Link to={"/signup"} className="underline">
                     Signup
                   </Link>
                 </span>
