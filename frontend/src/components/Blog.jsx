@@ -2,6 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import network from "../../network"
 import { useParams, useSearchParams } from "react-router-dom"
+import Header from "./Header";
 
 export  default function Blog(){
     const [data,setdata]=useState({title:"",description:"",author:"",date:""}); 
@@ -26,10 +27,28 @@ export  default function Blog(){
 
     return (
         <>
-        <div>{data.title}</div>
-        <div>{data.description}</div>
-        <div>{data.date}</div>
-        <div>{data.author}</div>
+        <Header>
+
+        </Header>
+        <div className="flex justify-center">
+            <div className="max-w-[50rem] pl-10 pr-10 flex flex-col items-center pt-5 ">
+          
+                <div className="font-bold text-4xl underline">{data.title}</div>  
+                <div className=" flex flex-col w-full">  
+                <div className="pr-10 pt-5 font-semibold flex justify-end text-sm">{data.date}</div>
+                </div>
+                <div className="pt-10 font-medium leading-9">{data.description}</div>
+                <div className="w-full pt-10">
+                    <div>
+                <div className="font-bold">{data.author}</div>
+                <div className="">  Author</div>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        
         </>
     )
 }
