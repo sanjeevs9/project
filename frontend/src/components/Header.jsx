@@ -25,7 +25,7 @@ export default function Header() {
       <div>
         <div className="flex    pl-8 pr-8  flex-row w-full bg-red-300">
           <div className="flex  w-1/2  items-center gap-4">
-            <div className="w-36 h-16  flex flex-col justify-center p-3 cursor-pointer" onClick={()=>{navigate("/post")}}>
+            <div className="w-36 h-16  flex flex-col justify-center p-3 cursor-pointer" onClick={()=>{navigate("/")}}>
               <img
                 src="https://advisoropedia.in/wp-content/uploads/2024/02/White-Transparent.png"
                 alt="Blogger Icon"
@@ -33,7 +33,7 @@ export default function Header() {
             </div>
           </div>
           <div className="flex  w-1/2 gap-8 justify-end p-3 items-center">
-            <div className="flex  gap-1 hover:inset-2 cursor-pointer hover:scale-110 motion-reduce:transform-none">
+            <div className="flex  gap-1 hover:inset-2 cursor-pointer hover:scale-110 motion-reduce:transform-none " onClick={()=>{navigate("/write")}}>
               <div className="h-8 w-8 flex-row  ">
                 <svg
                   className="flex"
@@ -50,7 +50,7 @@ export default function Header() {
                   />
                 </svg>
               </div>
-              <div className="flex pt-1 " onClick={()=>{navigate("/write")}}>Write</div>
+              <div className="flex pt-1 " >Write</div>
             </div>
 
             <div

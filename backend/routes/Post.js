@@ -10,8 +10,12 @@ router.get("", async (req, res) => {
   const limit = parseInt(req.query.limit) || 5;
 
   const skip = (page - 1) * limit;
-  const posts = await Post.find().skip(skip).limit(limit);
+  const posts = await Post.find()
+  .sort({createdAt:-1})
+  .skip(skip)
+  .limit(limit)
 
+  console.log(posts)
   res.json(posts);
 });
 

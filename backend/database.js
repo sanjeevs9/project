@@ -37,7 +37,7 @@ const PostSchema = mongoose.Schema({
   description: String,
   publish_date: String,
   author: String,
-});
+}, { timestamps: true });
 
 const User = mongoose.model("User", UserSchema);
 const Post = mongoose.model("Post", PostSchema);
